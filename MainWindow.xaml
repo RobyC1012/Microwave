@@ -1,0 +1,18 @@
+﻿<Window x:Class="Microwave.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Microwave"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="StareUsa" Content="Usa Inchisa" HorizontalAlignment="Left" Margin="113,99,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="StareCuptor" Content="Gatire OFF" HorizontalAlignment="Left" Margin="113,164,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Ticker" Content="0" HorizontalAlignment="Left" Margin="113,275,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="ButonInchideUsa" Content="Inchide Usa" HorizontalAlignment="Left" Margin="513,92,0,0" VerticalAlignment="Top" Height="45" Width="101" Click="ButonInchideUsa_Click"/>
+        <Button x:Name="ButonDeschideUsa" Content="Deshcide Usa" HorizontalAlignment="Left" Margin="513,0,0,0" VerticalAlignment="Center" Height="45" Width="101" Click="ButonDeschideUsa_Click"/>
+        <Button x:Name="ButonGatire" Content="Oprit" HorizontalAlignment="Left" Margin="513,288,0,0" VerticalAlignment="Top" Height="45" Width="101" Click="ButonGatire_Click"/>
+
+    </Grid>
+</Window>
