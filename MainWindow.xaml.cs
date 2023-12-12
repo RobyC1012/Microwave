@@ -43,5 +43,43 @@ namespace Microwave
         {
             _microunde.Gateste();
         }
+
+        public void setUsaDeschisa()
+        {
+            StareUsa.Content = "Usa deschisa";
+            setGatesteOff();
+        }
+
+        public void setUsaInchisa()
+        {
+            StareUsa.Content = "Usa inchisa";
+            setGatesteOff();
+        }
+
+        public void setGatesteOn()
+        {
+            StareCuptor.Content = "Gatire ON";
+            setButonGatireOn();
+        }
+        public void setGatesteOff()
+        {
+            StareCuptor.Content = "Gatire OFF";
+            setButonGatireOff();
+        }
+
+        public void setTimpRamas()
+        {
+            Ticker.Content = _microunde.GetTimpRamas();
+        }
+
+        public void setButonGatireOn()
+        {
+            ButonGatire.Content = "Pornit";
+        }
+
+        public void setButonGatireOff()
+        {
+            ButonGatire.Content = "Oprit";
+        }
     }
 }
