@@ -7,7 +7,7 @@ using static Microwave.MainWindow;
 
 namespace Microwave
 {
-    class Microunde : IAfisaj_Microunde
+    class Microunde
     {
         public enum Stari
         {
@@ -15,7 +15,6 @@ namespace Microwave
             STARE_USA_DESCHISA,
             STARE_GATESTE_ON
         }
-
 
         private Stari stare {  get; set; }
         private int timp_ramas;
@@ -33,17 +32,25 @@ namespace Microwave
 
         public void DeschideUsa()
         {
+
+            stare.DeschideUsa();
+
             switch (stare)
             {
                 case Stari.STARE_GATESTE_ON:
                 {
-                    setGatesteOff();
-                    setUsaDeschisa();
+                    stare = Stari.STARE_USA_DESCHISA;
+                    _mainWindow.setUsaDeschisa();
                     break;
                 }
                 case Stari.STARE_USA_INCHISA:
                 {
-                    setUsaDeschisa();
+                    stare = Stari.STARE_USA_DESCHISA;
+                    _mainWindow.setUsaDeschisa();
+                    break;
+                }
+                case Stari.STARE_USA_DESCHISA:
+                {
                     break;
                 }
             }
@@ -53,9 +60,18 @@ namespace Microwave
         {
             switch(stare)
             {
+                case Stari.STARE_GATESTE_ON:
+                {
+                    break;
+                }
+                case Stari.STARE_USA_INCHISA:
+                {
+                    break;
+                }
                 case Stari.STARE_USA_DESCHISA:
                 {
-                    setUsaInchisa();   
+                    stare = Stari.STARE_USA_INCHISA;
+                    _mainWindow.setUsaInchisa();
                     break;
                 }
             }
@@ -65,13 +81,24 @@ namespace Microwave
         {
             switch (stare)
             {
+                case Stari.STARE_GATESTE_ON:
+                {
+                    stare = Stari.STARE_USA_INCHISA;
+                    _mainWindow.setUsaInchisa();
+                    break;
+                }
                 case Stari.STARE_USA_INCHISA:
                 {
-                    setGatesteOn();
+                    stare = Stari.STARE_GATESTE_ON;
+                    _mainWindow.setGatesteOn();
+                    _mainWindow.setTimpRamas();
                     if(timp_ramas == 0)
                         timp_ramas = 10;
-                    setTimpRamas();
                     TickCeas();
+                    break;
+                }
+                case Stari.STARE_USA_DESCHISA:
+                {
                     break;
                 }
             }
@@ -81,51 +108,20 @@ namespace Microwave
         {
             while (timp_ramas >= 0 && stare == Stari.STARE_GATESTE_ON)
             {
+                _mainWindow.setTimpRamas();
                 await Task.Delay(1000);
                 timp_ramas--;
-                setTimpRamas();
             }
 
             if (GetStare() == Stari.STARE_GATESTE_ON)
             {
-                for(int i = 0; i < 3; i++)
-                    Console.Beep(1200, 800);
-                setUsaInchisa();
-                setGatesteOff();
+                stare = Stari.STARE_USA_INCHISA;
+                timp_ramas = 0;
+                _mainWindow.setUsaInchisa();
             }
         }
 
         public Stari GetStare() { return stare; }
-        
-        public void setGatesteOn()
-        {
-            stare = Stari.STARE_GATESTE_ON;
-            _mainWindow.ButonGatire.Content = "Pornit";
-            _mainWindow.StareCuptor.Content = "Gatire ON";
-        }
-
-        public void setGatesteOff()
-        {
-            stare = Stari.STARE_USA_INCHISA;
-            _mainWindow.ButonGatire.Content = "Oprit";
-            _mainWindow.StareCuptor.Content = "Gatire OFF";
-        }
-
-        public void setUsaDeschisa()
-        {
-            stare = Stari.STARE_USA_DESCHISA;
-            _mainWindow.StareUsa.Content = "Usa deschisa";
-        }
-
-        public void setUsaInchisa()
-        {
-            stare = Stari.STARE_USA_INCHISA;
-            _mainWindow.StareUsa.Content = "Usa inchisa";
-        }
-
-        public void setTimpRamas()
-        {
-            _mainWindow.Ticker.Content = timp_ramas;
-        }
+        public int GetTimpRamas() {  return timp_ramas; }
     }
 }
