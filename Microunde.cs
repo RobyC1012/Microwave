@@ -32,7 +32,6 @@ namespace Microwave
 
         public void DeschideUsa()
         {
-
             switch (stare)
             {
                 case Stari.STARE_GATESTE_ON:
