@@ -1,4 +1,6 @@
-﻿namespace Microwave;
+﻿using System;
+
+namespace Microwave;
 
 public interface IAfisaj_Microunde
 {
@@ -6,5 +8,5 @@ public interface IAfisaj_Microunde
     public void setGatesteOff();
     public void setUsaDeschisa();
     public void setUsaInchisa();
-    public void setTimpRamas();
+    public void setTimpRamas(int time);
 }

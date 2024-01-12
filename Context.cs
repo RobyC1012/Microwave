@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace Microwave
 {
-    public class Context
+    public class Context : IObservable<Stare>
     {
         public Stare stareCurenta;
-        public int timpRamas;
+        public int timpRamas { get; set;}
         public MainWindow mainWindow;
+        public List<IObserver<Stare>> observatori = new List<IObserver<Stare>>();
+
+        #region Singleton
 
         private static Context _instance = null;
         private Context(MainWindow window) {
@@ -21,7 +24,9 @@ namespace Microwave
         }
         public static Context getInstance(MainWindow window) => _instance == null ? new Context(window) : _instance;
 
+        #endregion
 
+        #region Logica functiilor de stare
         public void InchideUsa()
         {
             stareCurenta.InchideUsa();
@@ -39,26 +44,47 @@ namespace Microwave
 
         public int GetTimpRamas()
         {
-            return timpRamas; 
+            return timpRamas;
         }
+
+        #endregion
+
+        #region Sablon Observer
+
+        public void Display()
+        {
+            foreach (IObserver<Stare> observator in observatori)
+            {
+                observator.OnNext(stareCurenta);
+            }
+        }
+
+        public IDisposable Subscribe(IObserver<Stare> observator)
+        {
+            if (!observatori.Contains(observator))
+                observatori.Add(observator);
+            return new Unsubscribe(observatori, observator);
+        }
+
+        #endregion
+
+        #region Timer pentru gatire
 
         public async void TickCeas()
         {
-            while (timpRamas >= 0 && stareCurenta is STARE_GATESTE_ON)
+            while (timpRamas > 0 && stareCurenta is STARE_GATESTE_ON)
             {
-                mainWindow.setTimpRamas();
                 await Task.Delay(1000);
-                timpRamas--;
+                stareCurenta.TickCeas();
             }
 
-            if (stareCurenta is STARE_GATESTE_ON)
+            if (timpRamas == 0)
             {
-                stareCurenta.InchideUsa();
-                timpRamas = 0;
-                mainWindow.setTimpRamas();
+                stareCurenta = STARE_USA_INCHISA.getInstance();
+                Display();
             }
         }
 
-
+        #endregion
     }
 }
