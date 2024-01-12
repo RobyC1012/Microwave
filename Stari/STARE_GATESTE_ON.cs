@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Microwave.Stari
+﻿namespace Microwave.Stari
 {
     public class STARE_GATESTE_ON : Stare
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Microwave;
+﻿namespace Microwave;
 
 public interface IAfisaj_Microunde
 {
