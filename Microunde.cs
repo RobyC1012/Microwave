@@ -8,25 +8,16 @@ using static Microwave.MainWindow;
 namespace Microwave
 {
     class Microunde
-    {
-        public enum Stari
-        {
-            STARE_USA_INCHISA,
-            STARE_USA_DESCHISA,
-            STARE_GATESTE_ON
-        }
+    { 
+        /*private Context context;
 
-        private Stari stare {  get; set; }
-        private int timp_ramas;
-        private static MainWindow _mainWindow;
-        
-        
         private static Microunde _instance = null;
         private Microunde(MainWindow mainWindow)
         {
-            stare = Stari.STARE_USA_INCHISA;
+            context = Context.getInstance(mainWindow);
+           *//* stare = Stari.STARE_USA_INCHISA;
             timp_ramas = 0;
-            _mainWindow = mainWindow;
+            _mainWindow = mainWindow;*//*
         }
         public static Microunde getInstance(MainWindow mainWindow) => _instance == null ? new Microunde(mainWindow) : _instance;
 
@@ -119,6 +110,6 @@ namespace Microwave
         }
 
         public Stari GetStare() { return stare; }
-        public int GetTimpRamas() {  return timp_ramas; }
+        public int GetTimpRamas() {  return timp_ramas; }*/
     }
 }

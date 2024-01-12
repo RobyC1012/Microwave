@@ -16,32 +16,29 @@ using static Microwave.Microunde;
 
 namespace Microwave
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        Microunde _microunde;
+        public static Context _context;
 
         public MainWindow()
         {
-            _microunde = Microunde.getInstance(this);
             InitializeComponent();
+            _context = Context.getInstance(this);
         }
 
         private void ButonInchideUsa_Click(object sender, RoutedEventArgs e)
         {
-            _microunde.InchideUsa();
+            _context.InchideUsa();
         }
 
         private void ButonDeschideUsa_Click(object sender, RoutedEventArgs e)
         {
-            _microunde.DeschideUsa();
+            _context.DeschideUsa();
         }
 
         private void ButonGatire_Click(object sender, RoutedEventArgs e)
         {
-            _microunde.Gateste();
+            _context.Gateste();
         }
 
         public void setUsaDeschisa()
@@ -59,27 +56,17 @@ namespace Microwave
         public void setGatesteOn()
         {
             StareCuptor.Content = "Gatire ON";
-            setButonGatireOn();
+            ButonGatire.Content = "Pornit";
         }
         public void setGatesteOff()
         {
             StareCuptor.Content = "Gatire OFF";
-            setButonGatireOff();
+            ButonGatire.Content = "Oprit";
         }
 
         public void setTimpRamas()
         {
-            Ticker.Content = _microunde.GetTimpRamas();
-        }
-
-        public void setButonGatireOn()
-        {
-            ButonGatire.Content = "Pornit";
-        }
-
-        public void setButonGatireOff()
-        {
-            ButonGatire.Content = "Oprit";
+            Ticker.Content = _context.GetTimpRamas();
         }
     }
 }
