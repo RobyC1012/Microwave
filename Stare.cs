@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Microwave
 {
     public abstract class Stare
-    {   //add context
+    {   
         public static Context context = MainWindow._context;
 
         public abstract void DeschideUsa();
